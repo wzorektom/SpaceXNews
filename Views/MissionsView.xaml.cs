@@ -11,26 +11,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpacexNews.Controls
+namespace SpacexNews.Views
 {
     /// <summary>
-    /// Interaction logic for NavPanel.xaml
+    /// Interaction logic for MissionsView.xaml
     /// </summary>
-    public partial class NavPanel : UserControl
+    public partial class MissionsView : UserControl
     {
-        public NavPanel()
+        public MissionsView()
         {
             InitializeComponent();
-        }
-
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

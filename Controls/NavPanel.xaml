@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:SpacexNews.Controls"
+             xmlns:nav="clr-namespace:SpacexNews.States.Navigators"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -42,12 +43,106 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         
-        
-        
-        
+        <!-- Fade In/Out nav bar on mouse enter/leaves -->
+
+        <Storyboard x:Key="FadeInNavBar">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             Storyboard.TargetName="GridMenu"
+                             From="0.3" To="1.0" Duration="0:0:0:0.3">
+                
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="FadeOutNavBar">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             Storyboard.TargetName="GridMenu"
+                             From="1.0" To="0.3" Duration="0:0:0:0.3">
+                
+            </DoubleAnimation>
+        </Storyboard>
+
 
 
     </UserControl.Resources>
+
+
+    <UserControl.Triggers>
+
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource FadeOutNavBar}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="GridMenu">
+            <BeginStoryboard Storyboard="{StaticResource FadeInNavBar}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="GridMenu">
+            <BeginStoryboard Storyboard="{StaticResource FadeOutNavBar}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+
+    </UserControl.Triggers>
+
+    <Border Effect="{StaticResource LoghtShadow}">
+
+        <Grid Height="Auto" x:Name="GridMenu" Grid.Row="1" Width="40" HorizontalAlignment="Left"
+              Background="{StaticResource MaterialDesignCardBackground}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+
+                <Button x:Name="ButtonOpenMenu" Padding="0" Width="40" Height="40"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="ButtonOpenMenu_Click">
+                    <materialDesign:PackIcon Foreground="#FC0324" Kind="Menu"/>
+                </Button>
+
+                <Button x:Name="ButtonCloseMenu" Padding="0" Width="40" Height="40"
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Visibility="Collapsed"
+                        Click="ButtonCloseMenu_Click">
+                    <materialDesign:PackIcon Foreground="#FC0324" Kind="ArrowLeft"/>
+                </Button>
+
+
+                <ListView x:Name="MainMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                    <ListViewItem Height="50">
+
+                        <ListViewItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding UpdateCurrentViewModelCommand}"
+                                          CommandParameter="{x:Static nav:ViewType.Mission}"/>
+                        </ListViewItem.InputBindings>
+
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FormatListBulleted" Width="25" Height="25"
+                                                     Margin="0,0,5,0"/>
+                            <TextBlock Text="Missions" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                    </ListViewItem>
+                    
+                </ListView>
+                
+
+            </StackPanel>
+            
+        </Grid>
+
+    </Border>
     
     
 </UserControl>

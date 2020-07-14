@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SpacexNews"
+             xmlns:views="clr-namespace:SpacexNews.ViewModel"
+             xmlns:viewmodels="clr-namespace:SpacexNews.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -14,6 +16,16 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodels:MissionViewModel}">
+                <views:MissionsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:StatisticsViewModel}">
+                <views:Statistics/>
+            </DataTemplate>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

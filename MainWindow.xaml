@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:SpacexNews" 
-        xmlns:local1="clr-namespace:SpacexNews.Controls"
+        xmlns:local="clr-namespace:SpacexNews.Controls"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBodyLight}"
         TextElement.FontWeight="Regular"
@@ -37,8 +36,13 @@
             </Grid.ColumnDefinitions>
 
 
-            <local1:TopBanner Grid.Row="0" Grid.ColumnSpan="2"/>
-         
+            <local:TopBanner Grid.Row="0" Grid.ColumnSpan="2"/>
+            <local:NavPanel Grid.Row="1" Grid.Column="0" DataContext="{Binding Navigator}"/>
+
+            <ContentControl x:Name="Cont"
+                            Grid.Row="1" Grid.Column="1"
+                            Content="{Binding Navigator.CurrentViewModel}"/>
+
 
         </Grid>
         
